@@ -1,24 +1,15 @@
 <template>
   <main class="p-4">
     <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-5">
-          <select class="form-select" @change="onChange">
-            <option selected>Choose a genre</option>
-            <option
-              v-for="(genre, index) in albumsGenres"
-              :key="index"
-              :value="genre"
-            >
-              {{ genre }}
-            </option>
-          </select>
-        </div>
-      </div>
       <div
         class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 p-5 gx-5"
       >
         <AlbumCard
+          v-show="
+            selectedGenre == album.genre ||
+            selectedGenre == '' ||
+            selectedGenre == 'All'
+          "
           :albumObj="album"
           v-for="(album, index) in albums"
           :key="index"
@@ -37,8 +28,10 @@ export default {
   data() {
     return {
       albums: [],
-      albumsGenres: [],
     };
+  },
+  props: {
+    selectedGenre: String,
   },
   components: {
     AlbumCard,
@@ -50,17 +43,8 @@ export default {
         .then((result) => {
           this.albums = result.data.response;
           console.log(this.albums);
-          this.albums.forEach((element) => {
-            if (!this.albumsGenres.includes(element.genre)) {
-              this.albumsGenres.push(element.genre);
-            }
-          });
-          console.warn(this.albumsGenres);
         })
         .catch((error) => console.error(error));
-    },
-    onChange(event) {
-      console.log(event.target.value);
     },
   },
   created() {
@@ -72,6 +56,7 @@ export default {
 <style scoped lang="scss">
 @import "../assets/scss/partials/_variables.scss";
 main {
+  height: 100vh;
   background-color: $darkBlueGray;
 }
 </style>
