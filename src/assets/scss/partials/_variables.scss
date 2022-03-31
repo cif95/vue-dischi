@@ -1,2 +1,27 @@
 $lightGray : #2E3A46;
 $darkBlueGray : #1E2D3B;
+
+@mixin albumCard {
+	height: 95%;
+	text-align: center;
+	padding: 1.25rem;
+  min-width: 130px;
+  word-break: break-word;
+  margin-bottom: 1.5rem;
+  background-color: $lightGray;
+	img {
+		height: 50%;
+	}
+	h5.my-card-title {
+		color: white;
+		font-size: 1.35rem;
+		padding-top: 1rem;
+		font-weight: bold;
+		margin-bottom: 1rem;
+		text-transform: uppercase;
+  }
+  .my-card-text {
+    color: grey;
+    margin-bottom: 0;
+  }
+}
