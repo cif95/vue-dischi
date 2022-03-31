@@ -5,11 +5,7 @@
         class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 p-5 gx-5"
       >
         <AlbumCard
-          v-show="
-            selectedGenre == album.genre ||
-            selectedGenre == '' ||
-            selectedGenre == 'All'
-          "
+          v-show="filterGenres(album)"
           :albumObj="album"
           v-for="(album, index) in albums"
           :key="index"
@@ -45,6 +41,15 @@ export default {
           console.log(this.albums);
         })
         .catch((error) => console.error(error));
+    },
+    filterGenres(album) {
+      if (
+        this.selectedGenre == album.genre ||
+        this.selectedGenre == "" ||
+        this.selectedGenre == "All"
+      ) {
+        return true;
+      }
     },
   },
   created() {
