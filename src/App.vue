@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <Header @genreSelect="getSelectedGenre" />
-    <Albums :selectedGenre="selectedGenre" />
+    <Header @genreSelect="getSelectedGenre" :genres="albumsGenres" />
+    <Albums :selectedGenre="selectedGenre" @gettedGenres="getAlbumsGenres" />
   </div>
 </template>
 
@@ -14,6 +14,7 @@ export default {
   data() {
     return {
       selectedGenre: "",
+      albumsGenres: "",
     };
   },
   components: {
@@ -24,6 +25,9 @@ export default {
     getSelectedGenre(selected) {
       this.selectedGenre = selected;
       console.log(this.selectedGenre);
+    },
+    getAlbumsGenres(albumsGenres) {
+      this.albumsGenres = albumsGenres;
     },
   },
 };

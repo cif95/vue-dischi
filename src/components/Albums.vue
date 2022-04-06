@@ -24,6 +24,7 @@ export default {
   data() {
     return {
       albums: [],
+      albumsGenres: [],
     };
   },
   props: {
@@ -39,6 +40,13 @@ export default {
         .then((result) => {
           this.albums = result.data.response;
           console.log(this.albums);
+          this.albums.forEach((element) => {
+            if (!this.albumsGenres.includes(element.genre)) {
+              this.albumsGenres.push(element.genre);
+            }
+          });
+          this.$emit("gettedGenres", this.albumsGenres);
+          console.warn(this.albumsGenres);
         })
         .catch((error) => console.error(error));
     },
@@ -61,7 +69,7 @@ export default {
 <style scoped lang="scss">
 @import "../assets/scss/partials/_variables.scss";
 main {
-  height: 100vh;
+  min-height: 92vh;
   background-color: $darkBlueGray;
 }
 </style>
